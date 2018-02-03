@@ -1,12 +1,16 @@
 #ifndef node_h
 #define node_h
 
+#include <string>
+
+using namespace std;
+
 class Node {
 
 public:
 
 	//constructor
-	Node(String word);
+	Node(string word);
 
 	string getWord();
 	int getCount();
@@ -20,3 +24,5 @@ private:
 	int wordCount;
 
 };
+
+#endif
