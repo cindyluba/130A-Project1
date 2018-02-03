@@ -1,34 +1,23 @@
 #include "node.h"
+#include <string>
 
-class Node {
+//constructor
+Node::Node(string newWord){
+	leftChild = NULL;
+	rightChild = NULL;
+	word = newWord;
+	wordCount = 1;
+}
 
-public:
-
-	//constructor
-	Node::Node(String word){
-		leftChild = NULL;
-		rightChild = NULL;
-		this.word = word;
-		wordCount = 1;
-	}
-
-	string Node::getWord() {
-		return this.word;
-	}
-	int Node::getCount() {
-		return this.wordCount;
-	}
-	Node* Node::getLeft() {
-		return this->leftChild;
-	}
-	Node* Node::getRight() {
-		return this->rightChild;
-	}
-	
-private:
-	Node* leftChild;
-	Node* rightChild;
-	string word;
-	int wordCount;
-
-};
+string Node::getWord() {
+	return word;
+}
+int Node::getCount() {
+	return wordCount;
+}
+Node* Node::getLeft() {
+	return leftChild;
+}
+Node* Node::getRight() {
+	return rightChild;
+}
