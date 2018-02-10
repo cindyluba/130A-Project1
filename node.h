@@ -11,6 +11,7 @@ public:
 
 	//constructor
 	Node(string word);
+	~Node();
 
 	string getWord();
 	int getCount();
