@@ -18,7 +18,8 @@ public:
 	bool search(Node* node, string word);
 	void insert(string word);	//insert function
 	void insert(Node* node, string word);
-	void delete(string word);	//delete function
+	void deleteWord(string word);	//delete function
+	Node* findNode(Node* node, string word);
 	void sort(); 				//sort function
 	void rangeSearch(string startWord, string endWord); //rangeSearch function 
 	void destroyTree();
