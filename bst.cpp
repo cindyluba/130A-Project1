@@ -15,6 +15,17 @@ BST::~BST(){
   destroyTree();
 }
 
+void BST::printInorder() {
+  printInorder(root);
+}
+void BST::printInorder(Node* node) {
+  if (node == NULL)
+    return;
+  printInorder(node->left);
+  cout << node->word << endl;
+  printInorder(node->right);
+}
+
 bool BST::search(string word) {
   return search(root, word);
 }

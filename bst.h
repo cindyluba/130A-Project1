@@ -27,7 +27,7 @@ class BST {
   //constructor
   BST();
   ~BST();
-
+  void printInorder();
   bool search(string word);  //search function
   void insert(string word);	//insert function
   Node* getRoot();
@@ -40,6 +40,7 @@ class BST {
 
  private:
   Node* root;
+  void printInorder(Node* node);
   bool search(Node* node, string word);
   void insert(Node*& node, string word);
   void deleteWord(Node*& node, string word);
