@@ -14,4 +14,4 @@ bst.o: bst.cpp
 hashTable.o: hashTable.cpp
 
 clean:
-	rm -rf *.o main sorted_output.txt
+	rm -rf *.o main output.txt

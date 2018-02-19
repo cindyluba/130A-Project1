@@ -35,16 +35,14 @@ int main() {
   BST *bst = new BST;
   HashTable *hashTable;
   boost::timer t;
-  double elapsedTime;
+  double elapsedTimeBST, elapsedTimeHT;
   
   for(const auto& pathName : getPathNames("hotels")) {
     inFile.open(pathName);
     if (!inFile) {
  
     }
-    for (int i = 0; i < 25; i++) {
-      inFile >> word;
-      //while (inFile >> word) {
+    while (inFile >> word) {
       for (unsigned int i = 0; i < word.size(); i++) {
 	word[i] = tolower(word[i]);
 	if (!isalpha(word[i])) {
@@ -74,16 +72,20 @@ int main() {
     case 1:
       {
 	string wordToSearch;
-	bool wordExists;
+	bool wordExistsBST, wordExistsHT;
 	cin >> wordToSearch;
 	t.restart();
-	wordExists = bst->search(wordToSearch);
-	if (wordExists == true)
+	wordExistsBST = bst->search(wordToSearch);
+	elapsedTimeBST = t.elapsed();
+	t.restart();
+	wordExistsHT = hashTable->search(wordToSearch);
+	elapsedTimeHT = t.elapsed();
+	if (wordExistsBST && wordExistsHT)
 	  cout << "True" << endl;
 	else
 	  cout << "False" << endl;
-	elapsedTime = t.elapsed();
-	cout << fixed << "BST: " << elapsedTime << endl;
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
+	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
       break;
     case 2:
@@ -92,8 +94,12 @@ int main() {
 	cin >> wordToInsert;
 	t.restart();
 	bst->insert(wordToInsert);
-	elapsedTime = t.elapsed();
-	cout << fixed << "BST: " << elapsedTime << endl;
+	elapsedTimeBST = t.elapsed();
+	t.restart();
+	hashTable->insert(wordToInsert);
+	elapsedTimeHT = t.elapsed();
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
+	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
       break;
     case 3:
@@ -102,16 +108,24 @@ int main() {
 	cin >> wordToDelete;
 	t.restart();
 	bst->deleteWord(wordToDelete);
-	elapsedTime = t.elapsed();
-	cout << fixed << "BST: " << elapsedTime << endl;
+	elapsedTimeBST = t.elapsed();
+	t.restart();
+	hashTable->deleteWord(wordToDelete);
+	elapsedTimeHT = t.elapsed();
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
+	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
       break;
     case 4:
       {
 	t.restart();
 	bst->sort();
-	elapsedTime = t.elapsed();
-	cout << fixed << "BST: " << elapsedTime << endl;
+	elapsedTimeBST = t.elapsed();
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
+	t.restart();
+	hashTable->sort();
+	elapsedTimeHT = t.elapsed();
+	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
       break;
     case 5:
@@ -120,8 +134,13 @@ int main() {
 	cin >> startWord >> endWord;
 	t.restart();
 	bst->rangeSearch(startWord, endWord);
-	elapsedTime = t.elapsed();
-	cout << fixed << "BST: " << elapsedTime << endl;
+	elapsedTimeBST = t.elapsed();
+	cout << endl;
+	t.restart();
+	hashTable->rangeSearch(startWord, endWord);
+	elapsedTimeHT = t.elapsed();
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
+	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
     }
   }

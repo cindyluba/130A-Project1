@@ -105,7 +105,7 @@ void BST::deleteWord(Node*& node, string word) {
 
 void BST::sort() {
   ofstream outFile;
-  outFile.open("sorted_output.txt");
+  outFile.open("output.txt");
   sort(root, outFile);
   outFile << endl;
   outFile.close();

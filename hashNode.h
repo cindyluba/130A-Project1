@@ -35,6 +35,9 @@ class hashNode {
   void incrementCount() {
     wordCount++;
   }
+  void decrementCount() {
+    wordCount--;
+  }
   bool getIsOccupied() {
     return isOccupied;
   }
