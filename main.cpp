@@ -54,12 +54,9 @@ int main() {
     inFile.close();
   }
 
-  bst->printInorder();
-
   cout << "number of words: " << bst->countWords() << endl;
 
   while (true) {
-    cout << "Enter a command (1-search, 2-insert, 3-delete, 4-sort, 5-range search):" << endl;
     cin >> command;
 
     switch(command) {
@@ -67,7 +64,6 @@ int main() {
       {
 	string wordToSearch;
 	bool wordExists;
-	cout << "Enter a word to search: ";
 	cin >> wordToSearch;
 	wordExists = bst->search(wordToSearch);
 	if (wordExists == true)
@@ -79,7 +75,6 @@ int main() {
     case 2:
       {
 	string wordToInsert;
-	cout << "Enter a word to insert: ";
 	cin >> wordToInsert;
 	bst->insert(wordToInsert);
       }
@@ -87,7 +82,6 @@ int main() {
     case 3:
       {
 	string wordToDelete;
-	cout << "Enter a word to delete: ";
 	cin >> wordToDelete;
 	bst->deleteWord(wordToDelete);
       }
@@ -100,7 +94,6 @@ int main() {
     case 5:
       {
 	string startWord, endWord;
-	cout << "Enter the start word and end word, separated by a space: ";
 	cin >> startWord >> endWord;
 	bst->rangeSearch(startWord, endWord);
       }

@@ -56,30 +56,6 @@ void BST::insert(Node*& node, string word) {
 }
 
 void BST::deleteWord(string word) {
-  // Node* nodeToDelete = findNode(root, word);
-  // if(nodeToDelete == NULL) {
-  //   return;
-  // } else {
-  //   if(nodeToDelete->left==NULL && nodeToDelete->right==NULL) {
-  //     delete nodeToDelete;
-  //   } else if(nodeToDelete->right==NULL) {
-  //     Node* leftTree = nodeToDelete->left;
-  //     delete nodeToDelete->left;
-  //     nodeToDelete = leftTree;
-  //   } else if(nodeToDelete->left==NULL) {
-  //     Node* rightTree = nodeToDelete->right;
-  //     delete nodeToDelete->right;
-  //     nodeToDelete = rightTree;
-  //   } else {
-  //     Node* currentNode = nodeToDelete->right;
-  //     while (currentNode->left != NULL)
-  // 	currentNode = currentNode->left;
-  //     nodeToDelete->word = currentNode->word;
-  //     delete currentNode;
-  //   }
-
-  // }
-
   deleteWord(root, word);
 }
 
@@ -116,29 +92,19 @@ void BST::deleteWord(Node*& node, string word) {
   }
 }
 
-Node* BST::findNode(Node* node, string word) {
-  if(node == NULL) {
-    return NULL;
-  }
-  if(node->word == word){	
-    return node;
-  } else if(node->word.compare(word) < 0) {
-    search(node->left, word);
-  } else {
-    search(node->right, word);
-  }
-  return NULL;
-}
-
 void BST::sort() {
   ofstream outFile;
   outFile.open("sorted_output.txt");
   sort(root, outFile);
+  outFile << endl;
+  outFile.close();
 }
 
 void BST::sort(Node* node, ofstream& outFile) {
+  if (node == NULL)
+    return;
   sort(node->left, outFile);
-  outFile << node->word;
+  outFile << node->word << endl;
   sort(node->right, outFile);
 }
 
@@ -173,23 +139,6 @@ int BST::countWords(Node* node) {
   count += 1;
   count += countWords(node->right);
   return count;
-}
-
-void BST::printInorder() {
-
-  printInorder(root);
-  
-}
-
-void BST::printInorder(Node* node) {
-
-  if (node == NULL)
-    return;
-
-  printInorder(node->left);
-  cout << node->word << ": " << node->wordCount << " " << endl;
-  printInorder(node->right);
-
 }
 
 void BST::destroyTree(Node* node) {

@@ -29,16 +29,12 @@ class BST {
   ~BST();
 
   bool search(string word);  //search function
-  //  bool search(Node* node, string word);
   void insert(string word);	//insert function
-  //  void insert(Node* node, string word);
   Node* getRoot();
   void deleteWord(string word);	//delete function
-  Node* findNode(Node* node, string word);
   void sort(); 				//sort function
   void rangeSearch(string startWord, string endWord); //rangeSearch function 
   int countWords();
-  void printInorder();
   void destroyTree();
 
 
@@ -47,7 +43,6 @@ class BST {
   bool search(Node* node, string word);
   void insert(Node*& node, string word);
   void deleteWord(Node*& node, string word);
-  void printInorder(Node* node);
   void sort(Node* node, ofstream& outFile);
   void rangeSearch(Node* node, string startWord, string endWord);
   int countWords(Node* node);
