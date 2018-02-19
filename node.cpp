@@ -3,24 +3,27 @@
 
 //constructor
 Node::Node(string newWord){
-	leftChild = NULL;
-	rightChild = NULL;
-	word = newWord;
-	wordCount = 1;
+  leftChild = NULL;
+  rightChild = NULL;
+  word = newWord;
+  wordCount = 1;
 }
 
 string Node::getWord() {
-	return word;
+  return word;
 }
 int Node::getCount() {
-	return wordCount;
+  return wordCount;
+}
+void Node::incrementCount() {
+  wordCount = wordCount++;
 }
 void Node::incrementCount() {
 	wordCount++;
 }
 Node* Node::getLeft() {
-	return leftChild;
+  return leftChild;
 }
 Node* Node::getRight() {
-	return rightChild;
+  return rightChild;
 }
