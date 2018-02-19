@@ -2,11 +2,14 @@ CXX=g++
 
 CXXFLAGS= -std=c++17 -Wall -g
 
-LDFLAGS=-lstdc++fs
+all: main
 
-BINARIES=main node bst
+main: main.o bst.o
+	g++ -o main main.o bst.o -lstdc++fs
 
-all: ${BINARIES}
+main.o: main.cpp
+
+bst.o: bst.cpp
 
 clean:
-	/bin/rm -f *.o ${BINARIES}
+	rm -rf *.o main

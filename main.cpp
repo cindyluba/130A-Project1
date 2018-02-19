@@ -39,7 +39,7 @@ int main() {
     for (int i = 0; i < 25; i++) {
       inFile >> word;
     //while (inFile >> word) {
-      for (int i = 0; i < word.size(); i++) {
+      for (unsigned int i = 0; i < word.size(); i++) {
 	word[i] = tolower(word[i]);
 	if (!isalpha(word[i])) {
 	  word.erase(i, 1);

@@ -15,7 +15,7 @@ BST::~BST(){
 }
 
 bool BST::search(string word) {
-  search(root, word);
+  return search(root, word);
 }
 bool BST::search(Node* node, string word) {
   if(node == NULL) {
@@ -28,6 +28,7 @@ bool BST::search(Node* node, string word) {
   } else {
     search(node->right, word);
   }
+  return false;
 }
 
 Node* BST::getRoot() {
@@ -89,15 +90,14 @@ Node* BST::findNode(Node* node, string word) {
   } else {
     search(node->right, word);
   }
+  return NULL;
 }
-
-
 
 void BST::sort() {
 
 }
 void BST::rangeSearch(string startWord, string endWord) {
-	
+  
 }
 
 void BST::destroyTree() {
