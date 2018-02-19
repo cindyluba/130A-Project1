@@ -121,10 +121,11 @@ int main() {
 	t.restart();
 	bst->sort();
 	elapsedTimeBST = t.elapsed();
-	cout << fixed << "BST: " << elapsedTimeBST << endl;
 	t.restart();
 	hashTable->sort();
 	elapsedTimeHT = t.elapsed();
+	cout << "/output.txt" << endl;
+	cout << fixed << "BST: " << elapsedTimeBST << endl;
 	cout << fixed << "Hash: " << elapsedTimeHT << endl;
       }
       break;

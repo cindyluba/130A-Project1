@@ -1,6 +1,5 @@
 #include "bst.h"
 #include <iostream>
-//#include "node.h"
 #include <string>
 #include <fstream>
 
