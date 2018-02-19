@@ -1,5 +1,6 @@
 #include "bst.h"
 #include <string>
+#include "node.h"
 
 using namespace std;
 
@@ -19,30 +20,35 @@ bool BST::search(Node* node, string word) {
 	if(node == NULL) {
 		return false;
 	}
-	if(node->getWord() == word){	
+	if(node->word == word){	
 		return true;
-	} else if(node->getWord().compare(word) < 0) {
-		search(node->getLeft(), word);
+	} else if(node->word.compare(word) < 0) {
+		search(node->left, word);
 	} else {
-		search(node->getRight(), word);
+		search(node->right, word);
 	}
+}
+
+Node* BST::getRoot() {
+	return root;
 }
 
 void BST::insert(string word) {
 		insert(root, word);
 }
-void BST::insert(Node* node, string word) {
+void BST::insert(Node*& node, string word) {
 	//if root of BST is null, create a new node and set that to the root, otherwise, check comparision value and recursively call insert until there is an empty node
 	if(node == NULL) {
-		node = new Node(word);
+		Node* newNode = new Node(word);
+		node = newNode;
 	} else {
-		if(node->getWord().compare(word) == 0) {
-			node->incrementCount();
-		} else if(node->getWord().compare(word) > 0){
-			insert(node->getRight(), word);
-		} else {
-			insert(node->getLeft(), word);
-		}
+		if(node->word.compare(word) == 0) {
+      		node->wordCount = node->wordCount + 1;
+   	 	} else if(word.compare(node->word) > 0){
+      		insert(node->right, word);
+   		} else {
+     		insert(node->left, word);
+		 }
 	}
 }
 
@@ -51,21 +57,21 @@ void BST::deleteWord(string word) {
   if(nodeToDelete == NULL) {
     return;
   } else {
-    if(nodeToDelete->getLeft()==NULL && nodeToDelete->getRight()==NULL) {
+    if(nodeToDelete->left==NULL && nodeToDelete->right==NULL) {
       delete nodeToDelete;
-    } else if(nodeToDelete->getRight()==NULL) {
-      Node* leftTree = nodeToDelete->getLeft();
-      delete nodeToDelete->getLeft();
+    } else if(nodeToDelete->right==NULL) {
+      Node* leftTree = nodeToDelete->left;
+      delete nodeToDelete->left;
       nodeToDelete = leftTree;
-    } else if(nodeToDelete->getLeft()==NULL) {
-      Node* rightTree = nodeToDelete->getRight();
-      delete nodeToDelete->getRight();
+    } else if(nodeToDelete->left==NULL) {
+      Node* rightTree = nodeToDelete->right;
+      delete nodeToDelete->right;
       nodeToDelete = rightTree;
     } else {
-      Node* currentNode = nodeToDelete->getRight();
-      while (currentNode->getLeft() != NULL)
-	currentNode = currentNode->getLeft();
-      nodeToDelete->getWord() = currentNode->getWord();
+      Node* currentNode = nodeToDelete->right;
+      while (currentNode->left != NULL)
+	currentNode = currentNode->left;
+      nodeToDelete->word = currentNode->word;
       delete currentNode;
     }
 
@@ -75,12 +81,12 @@ Node* BST::findNode(Node* node, string word) {
   if(node == NULL) {
     return NULL;
   }
-  if(node->getWord() == word){	
+  if(node->word == word){	
     return node;
-  } else if(node->getWord().compare(word) < 0) {
-    search(node->getLeft(), word);
+  } else if(node->word.compare(word) < 0) {
+    search(node->left, word);
   } else {
-    search(node->getRight(), word);
+    search(node->right, word);
   }
 }
 
@@ -91,6 +97,23 @@ void BST::sort() {
 }
 void BST::rangeSearch(string startWord, string endWord) {
 	
+}
+
+void BST::printInorder() {
+
+  printInorder(root);
+
+}
+
+void BST::printInorder(Node* node) {
+
+  if (node == NULL)
+    return;
+
+  printInorder(node->left);
+  cout << node->word << ": " << node->wordCount << " " << endl;
+  printInorder(node->right);
+
 }
 
 void BST::destroyTree() {
