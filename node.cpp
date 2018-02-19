@@ -15,6 +15,9 @@ string Node::getWord() {
 int Node::getCount() {
 	return wordCount;
 }
+void Node::incrementCount() {
+	wordCount++;
+}
 Node* Node::getLeft() {
 	return leftChild;
 }
