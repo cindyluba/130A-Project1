@@ -27,6 +27,7 @@ vector<fs::path> getPathNames(fs::path path) {
 
 int main() {
 
+  int command;
   ifstream inFile;
   string word;
   BST *bst = new BST;
@@ -38,7 +39,7 @@ int main() {
     }
     for (int i = 0; i < 25; i++) {
       inFile >> word;
-    //while (inFile >> word) {
+      //while (inFile >> word) {
       for (unsigned int i = 0; i < word.size(); i++) {
 	word[i] = tolower(word[i]);
 	if (!isalpha(word[i])) {
@@ -54,6 +55,57 @@ int main() {
   }
 
   bst->printInorder();
+
+  cout << "number of words: " << bst->countWords() << endl;
+
+  while (true) {
+    cout << "Enter a command (1-search, 2-insert, 3-delete, 4-sort, 5-range search):" << endl;
+    cin >> command;
+
+    switch(command) {
+    case 1:
+      {
+	string wordToSearch;
+	bool wordExists;
+	cout << "Enter a word to search: ";
+	cin >> wordToSearch;
+	wordExists = bst->search(wordToSearch);
+	if (wordExists == true)
+	  cout << "True" << endl;
+	else
+	  cout << "False" << endl;
+      }
+      break;
+    case 2:
+      {
+	string wordToInsert;
+	cout << "Enter a word to insert: ";
+	cin >> wordToInsert;
+	bst->insert(wordToInsert);
+      }
+      break;
+    case 3:
+      {
+	string wordToDelete;
+	cout << "Enter a word to delete: ";
+	cin >> wordToDelete;
+	bst->deleteWord(wordToDelete);
+      }
+      break;
+    case 4:
+      {
+	bst->sort();
+      }
+      break;
+    case 5:
+      {
+	string startWord, endWord;
+	cout << "Enter the start word and end word, separated by a space: ";
+	cin >> startWord >> endWord;
+	bst->rangeSearch(startWord, endWord);
+      }
+    }
+  }
   
   return 0;
   

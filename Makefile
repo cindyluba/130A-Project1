@@ -12,4 +12,4 @@ main.o: main.cpp
 bst.o: bst.cpp
 
 clean:
-	rm -rf *.o main
+	rm -rf *.o main sorted_output.txt

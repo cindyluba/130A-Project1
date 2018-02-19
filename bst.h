@@ -2,6 +2,7 @@
 #define bst_h
 
 #include <string>
+#include <fstream>
 //#include "node.h"
 
 using namespace std;
@@ -36,6 +37,7 @@ class BST {
   Node* findNode(Node* node, string word);
   void sort(); 				//sort function
   void rangeSearch(string startWord, string endWord); //rangeSearch function 
+  int countWords();
   void printInorder();
   void destroyTree();
 
@@ -44,7 +46,11 @@ class BST {
   Node* root;
   bool search(Node* node, string word);
   void insert(Node*& node, string word);
+  void deleteWord(Node*& node, string word);
   void printInorder(Node* node);
+  void sort(Node* node, ofstream& outFile);
+  void rangeSearch(Node* node, string startWord, string endWord);
+  int countWords(Node* node);
   void destroyTree(Node* node);
 
 };
