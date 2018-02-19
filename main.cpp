@@ -4,8 +4,14 @@
 #include <vector>
 #include <experimental/filesystem>
 #include <fstream>
+<<<<<<< HEAD
 
 #include "bst.h"
+=======
+#include <boost/timer.hpp>
+#include "bst.h"
+#include "hashTable.h"
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
 
 using namespace std;
 
@@ -27,10 +33,20 @@ vector<fs::path> getPathNames(fs::path path) {
 
 int main() {
 
+<<<<<<< HEAD
+=======
+  vector<string> wordList;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
   int command;
   ifstream inFile;
   string word;
   BST *bst = new BST;
+<<<<<<< HEAD
+=======
+  HashTable *hashTable;
+  boost::timer t;
+  double elapsedTime;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
   
   for(const auto& pathName : getPathNames("hotels")) {
     inFile.open(pathName);
@@ -48,18 +64,34 @@ int main() {
 	}
       }
       if (STOP_WORDS.count(word) == 0 && word.size() > 0) {
+<<<<<<< HEAD
 		bst->insert(word); 
+=======
+	wordList.push_back(word); 
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
     }
     inFile.close();
   }
 
+<<<<<<< HEAD
   bst->printInorder();
 
   cout << "number of words: " << bst->countWords() << endl;
 
   while (true) {
     cout << "Enter a command (1-search, 2-insert, 3-delete, 4-sort, 5-range search):" << endl;
+=======
+ 
+  hashTable = new HashTable(wordList.size());
+
+  for (string word : wordList) {
+    bst->insert(word);
+    hashTable->insert(word);
+  }
+
+  while (true) {
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
     cin >> command;
 
     switch(command) {
@@ -67,46 +99,92 @@ int main() {
       {
 	string wordToSearch;
 	bool wordExists;
+<<<<<<< HEAD
 	cout << "Enter a word to search: ";
 	cin >> wordToSearch;
+=======
+	cin >> wordToSearch;
+	t.restart();
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
 	wordExists = bst->search(wordToSearch);
 	if (wordExists == true)
 	  cout << "True" << endl;
 	else
 	  cout << "False" << endl;
+<<<<<<< HEAD
+=======
+	elapsedTime = t.elapsed();
+	cout << fixed << "BST: " << elapsedTime << endl;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
       break;
     case 2:
       {
 	string wordToInsert;
+<<<<<<< HEAD
 	cout << "Enter a word to insert: ";
 	cin >> wordToInsert;
 	bst->insert(wordToInsert);
+=======
+	cin >> wordToInsert;
+	t.restart();
+	bst->insert(wordToInsert);
+	elapsedTime = t.elapsed();
+	cout << fixed << "BST: " << elapsedTime << endl;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
       break;
     case 3:
       {
 	string wordToDelete;
+<<<<<<< HEAD
 	cout << "Enter a word to delete: ";
 	cin >> wordToDelete;
 	bst->deleteWord(wordToDelete);
+=======
+	cin >> wordToDelete;
+	t.restart();
+	bst->deleteWord(wordToDelete);
+	elapsedTime = t.elapsed();
+	cout << fixed << "BST: " << elapsedTime << endl;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
       break;
     case 4:
       {
+<<<<<<< HEAD
 	bst->sort();
+=======
+	t.restart();
+	bst->sort();
+	elapsedTime = t.elapsed();
+	cout << fixed << "BST: " << elapsedTime << endl;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
       break;
     case 5:
       {
 	string startWord, endWord;
+<<<<<<< HEAD
 	cout << "Enter the start word and end word, separated by a space: ";
 	cin >> startWord >> endWord;
 	bst->rangeSearch(startWord, endWord);
+=======
+	cin >> startWord >> endWord;
+	t.restart();
+	bst->rangeSearch(startWord, endWord);
+	elapsedTime = t.elapsed();
+	cout << fixed << "BST: " << elapsedTime << endl;
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
       }
     }
   }
   
   return 0;
   
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 1cc8c21a5baba20807632831861ab17ea28d5e2e
