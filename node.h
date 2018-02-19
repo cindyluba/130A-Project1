@@ -15,6 +15,7 @@ public:
 
 	string getWord();
 	int getCount();
+	void incrementCount();
 	Node* getLeft();
 	Node* getRight();
 
