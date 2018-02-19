@@ -41,6 +41,7 @@ using namespace std;
 				return false;
 			}
 			key++;
+			if(key > tableSize) key = 0;
 		}
 		return true;
 	}
@@ -56,8 +57,8 @@ using namespace std;
 				table[key].incrementCount();
 				return;
 			}
-			if(key > tableSize) key = 0;
 			key++;
+			if(key > tableSize) key = 0;
 		}
 		table[key].setWord(word);
 		table[key].incrementCount();
