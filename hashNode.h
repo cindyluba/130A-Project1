@@ -32,6 +32,9 @@ public:
 	void incrementCount() {
 		wordCount++;
 	}
+	void decrementCount() {
+		wordCount--;
+	}
 	bool getIsOccupied() {
 		return isOccupied;
 	}

@@ -1,5 +1,10 @@
 #include "hashTable.h"
 #include "hashNode.h"
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <iostream>
 
 using namespace std; 
 
@@ -8,7 +13,7 @@ using namespace std;
 		table = new hashNode[tableSize];
 	}
 	hashTable::~hashTable() {
-
+		delete [] table;
 	}
 
 	//returns a hashVal (key) 
@@ -25,8 +30,20 @@ using namespace std;
 		return hashVal;
 	}
 
-	// bool search(string word);  //search function
-	// bool search(int key, string word);
+	//search function
+	bool hashTable::search(string word){
+		int key = hashVal(word, tableSize);
+		search(key, word);
+	}  
+	bool hashTable::search(int key, string word){
+		while(table[key].getWord() != word) {
+			if(!table[key].getIsOccupied() && !table[key].getTombstone()) {
+				return false;
+			}
+			key++;
+		}
+		return true;
+	}
 
 	//insert function
 	void hashTable::insert(string word) {
@@ -34,7 +51,6 @@ using namespace std;
 		insert(key, word);
 	}	
 	void hashTable::insert(int key, string word) {
-		hashNode* node = new hashNode(key, word);
 		while(table[key].getIsOccupied() == true) {
 			if(table[key].getWord() == word) {
 				table[key].incrementCount();
@@ -50,9 +66,43 @@ using namespace std;
 
 	}
 
-	// void deleteWord(string word);	//delete function
-	// void sort(); 				//sort function
-	// void rangeSearch(string startWord, string endWord); //rangeSearch function
+	void hashTable::deleteWord(string word) {
+		int key = hashVal(word, tableSize);
+		while(table[key].getWord() != word) {
+			if(!table[key].getIsOccupied() && !table[key].getTombstone()) {
+				return;
+			}
+			key++;
+		}
+		table[key].decrementCount();
+		if(table[key].getCount() == 0) {
+			table[key].setWord("");
+			table[key].setTombstone(true);
+			table[key].setIsOccupied(false);
+		}
+	}
+	void hashTable::sort() {
+		vector<string> names;
+		for(int i = 0; i < tableSize; i++) {
+			if(table[i].getIsOccupied()) {
+				names.push_back(table[i].getWord());
+			}
+		}
+		sort(names.begin(), names.end());
+		ofstream outFile;
+		outFile.open("hash_sorted_output.txt");
+		for(string s: names) {
+			outFile << s << endl;
+		}
+		outFile.close();
+	}
+	void hashTable::rangeSearch(string startWord, string endWord) {
+		for(int i = 0; i < tableSize; i++) {
+			if(table[i].getIsOccupied() && table[i].getWord() >= startWord && table[i].getWord() <= endWord) {
+				cout << table[i].getWord() << endl;
+			}
+		}
+	}
 
 
 
